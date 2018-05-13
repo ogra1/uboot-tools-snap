@@ -7,7 +7,7 @@ This snap contains a separate set of the u-boot tools from a
 tools that come with an underscore in the name need to be used with a dash
 in its place (i.e. uboot-tools.fit_info becomes uboot-tools.fit-info).
 
-## shipped applications
+## Shipped applications
 
 uboot-tools.dumpimage
 
@@ -35,7 +35,7 @@ uboot-tools.gen-eth-addr
 
 uboot-tools.gen-ethaddr-crc
 
-## using on Ubuntu Core
+## Using the snap on Ubuntu Core
 
 If you use this snap on an Ubuntu Core installation, please make sure to connect the home interface using
 
