@@ -64,7 +64,11 @@ parts:
       # configure
       make sandbox_defconfig
       # make
-      CROSS_COMPILE=arm-linux-gnueabihf- make tools-only
+      if [ -e "/usr/bin/arm-linux-gnueabihf-gcc" ]; then
+        CROSS_COMPILE=arm-linux-gnueabihf- make tools-only
+      else
+        make tools-only
+      fi
       # make install
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       BINARIES="gen_ethaddr_crc mkimage jtagconsole fit_check_sign fdtgrep \
