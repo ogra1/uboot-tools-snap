@@ -10,17 +10,29 @@ in its place (i.e. uboot-tools.fit_info becomes uboot-tools.fit-info).
 ## shipped applications
 
 uboot-tools.dumpimage
+
 uboot-tools.fdtgrep
+
 uboot-tools.img2srec
+
 uboot-tools.jtagconsole
+
 uboot-tools.mkenvimage
+
 uboot-tools.mkimage
+
 uboot-tools.ncb
+
 uboot-tools.netconsole
+
 uboot-tools.proftool
+
 uboot-tools.fit-check-sign
+
 uboot-tools.fit-info
+
 uboot-tools.gen-eth-addr
+
 uboot-tools.gen-ethaddr-crc
 
 ## using on Ubuntu Core
