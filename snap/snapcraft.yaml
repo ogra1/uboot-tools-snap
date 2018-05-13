@@ -2,7 +2,7 @@ name: uboot-tools
 summary: The various tools to manage u-boot installations
 description: |
   This snap contains a separate set of the u-boot tools from a
-  "make tools-only" build run. Note that dues to snapcraft restrictions
+  "make tools-only" build run. Note that due to snapcraft restrictions
   tools that come with an underscore in the name need to be used with a dash
   in its place (i.e. uboot-tools.fit_info becomes uboot-tools.fit-info).
 
