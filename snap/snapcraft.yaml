@@ -1,0 +1,82 @@
+name: uboot-tools
+summary: The various tools to manage u-boot installations
+description: |
+  This snap contains a separate set of the u-boot tools from a
+  "make tools-only" build run. Note that dues to snapcraft restrictions
+  tools that come with an underscore in the name need to be used with a dash
+  in its place (i.e. uboot-tools.fit_info becomes uboot-tools.fit-info).
+
+grade: stable
+confinement: strict
+adopt-info: uboot-tools
+
+apps:
+  dumpimage:
+    command: bin/dumpimage
+    plugs: [home]
+  fdtgrep:
+    command: bin/fdtgrep
+    plugs: [home]
+  img2srec:
+    command: bin/img2srec
+    plugs: [home]
+  jtagconsole:
+    command: bin/jtagconsole
+    plugs: [home]
+  mkenvimage:
+    command: bin/mkenvimage
+    plugs: [home]
+  mkimage:
+    command: bin/mkimage
+    plugs: [home]
+  ncb:
+    command: bin/ncb
+    plugs: [home]
+  netconsole:
+    command: bin/netconsole
+    plugs: [home]
+  proftool:
+    command: bin/proftool
+    plugs: [home]
+  fit-check-sign:
+    command: bin/fit_check_sign
+    plugs: [home]
+  fit-info:
+    command: bin/fit_info
+    plugs: [home]
+  gen-eth-addr:
+    command: bin/gen_eth_addr
+    plugs: [home]
+  gen-ethaddr-crc:
+    command: bin/gen_ethaddr_crc
+    plugs: [home]
+
+parts:
+  uboot-tools:
+    plugin: nil
+    source: git://git.denx.de/u-boot.git
+    source-type: git
+    source-tag: v2017.05
+    override-build: |
+      set -e
+      # set snap package version from git tag
+      snapcraftctl set-version "$(git describe --tags)"
+      # configure
+      make sandbox_defconfig
+      # make
+      CROSS_COMPILE=arm-linux-gnueabihf- make tools-only
+      # make install
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      BINARIES="gen_ethaddr_crc mkimage jtagconsole fit_check_sign fdtgrep \
+                netconsole proftool mkenvimage ncb img2srec fit_info \
+                gen_eth_addr dumpimage"
+      for binary in $BINARIES; do
+          cp -av tools/"$binary" $SNAPCRAFT_PART_INSTALL/bin/
+      done
+    build-packages:
+      - bc
+      - build-essential
+      - libpython2.7-dev
+      - libssl-dev
+      - on amd64 to armhf:
+        - gcc-arm-linux-gnueabihf:amd64
